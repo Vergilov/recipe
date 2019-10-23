@@ -30,7 +30,6 @@ public class IndexController {
         System.out.println("Cat ID is: "+categoryOptional.get().getId());
         System.out.println("UOM ID is: "+unitOfMeasureOptional.get().getId());
 
-        System.out.println("SOME MESSAGE TO SAY MONs!");
         return "index";
     }
 }
