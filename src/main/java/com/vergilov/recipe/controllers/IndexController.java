@@ -1,25 +1,27 @@
 package com.vergilov.recipe.controllers;
 
-import com.vergilov.recipe.repositories.CategoryRepository;
-import com.vergilov.recipe.repositories.UnitOfMeasureRepository;
+
+import com.vergilov.recipe.services.RecipeService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-
+@Slf4j
 @Controller
 public class IndexController {
 
-    private CategoryRepository categoryRepository;
-    private UnitOfMeasureRepository unitOfMeasureRepository;
+    private final RecipeService recipeService;
 
-
-    public IndexController(CategoryRepository categoryRepository, UnitOfMeasureRepository unitOfMeasureRepository) {
-        this.categoryRepository = categoryRepository;
-        this.unitOfMeasureRepository = unitOfMeasureRepository;
+    public IndexController(RecipeService recipeService) {
+        this.recipeService = recipeService;
     }
 
-    @RequestMapping({"","/","/index"})
-    public String getIndexPage(){
+    @RequestMapping({"", "/", "/index"})
+    public String getIndexPage(Model model) {
+        log.debug("Getting index Page");
+        model.addAttribute("recipes", recipeService.getRecipes());
+
         return "index";
     }
 }
